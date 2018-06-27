@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>prueba-element demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../prueba-element.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic prueba-element demo</h3>
+      <demo-snippet>
+        <template>
+          <prueba-element></prueba-element>
+        </template>
+      </demo-snippet>
+    </div>
+    <script>
+
+        const pruebaElement = document.querySelector('prueba-element');
+
+        const options = ['rock', 'paper', 'scissor'];
+        let machineOptions = option(0, 2),
+            inMachineOptions = options[machineOptions],
+            rock = 'rock',
+            paper = 'paper',
+            scissor = 'scissor';
+
+
+        function option(min, max) {
+            let number = Math.floor(Math.random() * (min, max));
+            return number;
+        }
+
+        console.log(machineOptions);
+
+        pruebaElement.addEventListener('kick', () => {
+            const inRock = event.detail.myRock;
+            if (inRock === rock) {
+                if (inMachineOptions === rock) {
+                    console.log('Empate');
+                } else if (inMachineOptions === paper) {
+                    console.log('Perdiste');
+                } else if (inMachineOptions === scissor) {
+                    console.log('Ganaste');
+                }
+            }
+        });
+
+        pruebaElement.addEventListener('kick-two', () => {
+            const inPaper = event.detail.myPaper;
+            if ()
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="prueba-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <button on-click="handleRock">Rock</button>
+    <br>
+    <button on-click="handlePaper">Paper</button>
+    <br>
+    <button on-click="scissor">Scissors</button>
+  </template>
+
+  <script>
+    /**
+     * `prueba-element`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class PruebaElement extends Polymer.Element {
+      static get is() { return 'prueba-element'; }
+      static get properties() {
+        return {
+            rock: {
+                type: String,
+                value: 'rock'
+            },
+            paper: {
+                type: String,
+                value: 'paper'
+            },
+            scissor: {
+                type: String,
+                value: 'scissor'
+            }
+        };
+      }
+
+      handleRock(event) {
+          this.dispatchEvent(
+              new CustomEvent('kick', {
+                detail: {
+                    myRock: this.rock
+                }
+              })
+          );
+      }
+
+      handlePaper(event) {
+          this.dispatchEvent(
+              new CustomEvent('kick-two', {
+                  detail: {
+                    myPaper: this.paper
+                  }
+              })
+          );
+      }
+
+    }
+
+    window.customElements.define(PruebaElement.is, PruebaElement);
+  </script>
+</dom-module>
