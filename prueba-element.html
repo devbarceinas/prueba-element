@@ -11,7 +11,7 @@
     <br>
     <button on-click="handlePaper">Paper</button>
     <br>
-    <button on-click="scissor">Scissors</button>
+    <button on-click="handleScissor">Scissors</button>
   </template>
 
   <script>
@@ -43,13 +43,11 @@
       }
 
       handleRock(event) {
-          this.dispatchEvent(
-              new CustomEvent('kick', {
-                detail: {
-                    myRock: this.rock
-                }
-              })
-          );
+        this.dispatchEvent(new CustomEvent('kick', {
+          detail: {
+              myRock: this.rock
+          }
+        }));
       }
 
       handlePaper(event) {
@@ -60,6 +58,16 @@
                   }
               })
           );
+      }
+
+      handleScissor(event) {
+        this.dispatchEvent(
+          new CustomEvent('kick-three', {
+            detail: {
+              myScissor: this.scissor
+            }
+          })
+        );
       }
 
     }

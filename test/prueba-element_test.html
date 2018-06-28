@@ -13,38 +13,44 @@
   </head>
   <body>
 
-    <test-fixture id="BasicTestFixture">
+    <test-fixture id="prueba-element">
       <template>
         <prueba-element></prueba-element>
       </template>
     </test-fixture>
 
-    <test-fixture id="ChangedPropertyTestFixture">
-      <template>
-        <prueba-element prop1="new-prop1"></prueba-element>
-      </template>
-    </test-fixture>
-
     <script>
-      suite('prueba-element', () => {
+      suite('New test', () => {
 
-        test('instantiating the element with default properties works', () => {
-          const element = fixture('BasicTestFixture');
-          assert.equal(element.prop1, 'prueba-element');
-          const elementShadowRoot = element.shadowRoot;
-          const elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello prueba-element!');
+        let myComponent;
+        setup(() => {
+          myComponent = fixture('prueba-element');
         });
 
-        test('setting a property on the element works', () => {
-          // Create a test fixture
-          const element = fixture('ChangedPropertyTestFixture');
-          assert.equal(element.prop1, 'new-prop1');
-          const elementShadowRoot = element.shadowRoot;
-          const elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello new-prop1!');
+        test('Get propertie rock', (done) => {
+          myComponent.addEventListener('kick', (event) => {
+            assert.equal(event.detail.myRock, 'rock');
+            done();
+          });
+          myComponent.rock = 'rock';
+          myComponent.handleRock();
         });
 
+        test('Get propertie paper', (done) => {
+          myComponent.addEventListener('kick-two', (event) => {
+            assert.equal(event.detail.myPaper, 'paper');
+            done();
+          });
+          myComponent.handlePaper();
+        });
+
+        test('Get propertie scissor', (done) => {
+          myComponent.addEventListener('kick-three', (event) => {
+            assert.equal(event.detail.myScissor, 'scissor');
+            done();
+          });
+          myComponent.handleScissor();
+        });
 
       });
     </script>

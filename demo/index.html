@@ -29,23 +29,23 @@
     <script>
 
         const pruebaElement = document.querySelector('prueba-element');
-
-        const options = ['rock', 'paper', 'scissor'];
-        let machineOptions = option(0, 2),
-            inMachineOptions = options[machineOptions],
-            rock = 'rock',
+        const rock = 'rock',
             paper = 'paper',
             scissor = 'scissor';
 
+        function getAleatorio() {
+          const options = ['rock', 'paper', 'scissor'];
+          let machineOptions = option(0, 3);
+          return options[machineOptions];
+        }
 
         function option(min, max) {
             let number = Math.floor(Math.random() * (min, max));
             return number;
         }
 
-        console.log(machineOptions);
-
-        pruebaElement.addEventListener('kick', () => {
+        pruebaElement.addEventListener('kick', (event) => {
+            let inMachineOptions = getAleatorio();
             const inRock = event.detail.myRock;
             if (inRock === rock) {
                 if (inMachineOptions === rock) {
@@ -58,9 +58,32 @@
             }
         });
 
-        pruebaElement.addEventListener('kick-two', () => {
+        pruebaElement.addEventListener('kick-two', (event) => {
+            let inMachineOptions = getAleatorio();
             const inPaper = event.detail.myPaper;
-            if ()
+            if (inPaper === paper) {
+              if (inMachineOptions === paper) {
+                console.log('Empate');
+              } else if (inMachineOptions === rock) {
+                console.log('Ganaste');
+              } else if (inMachineOptions === scissor) {
+                console.log('Perdiste');
+              }
+            }
+        });
+
+        pruebaElement.addEventListener('kick-three', () => {
+          let inMachineOptions = getAleatorio();
+          const inScissor = event.detail.myScissor;
+          if (inScissor === scissor) {
+            if (inMachineOptions === scissor) {
+              console.log('Empate');
+            } else if (inMachineOptions === paper) {
+              console.log('Ganaste');
+            } else if (inMachineOptions === rock) {
+              console.log('Perdiste');
+            }
+          }
         });
     </script>
 </body>
